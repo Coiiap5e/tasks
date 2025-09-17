@@ -1,0 +1,14 @@
+# Установить LF для Go файлов
+*.go text eol=lf
+*.mod text eol=lf
+
+# Установить CRLF для текстовых файлов
+*.txt text eol=crlf
+*.md text eol=crlf
+
+# Скрыть сгенерированные файлы из статистики GitHub
+go.sum linguist-generated=true
+vendor/** linguist-generated=true
+
+# Указать тип файлов
+*.go linguist-language=Go
