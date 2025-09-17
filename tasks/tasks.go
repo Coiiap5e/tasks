@@ -1,6 +1,7 @@
 package tasks
 
 func NaiveSearch(text, target string) int {
+	// тест
 	runeText := []rune(text)
 	runeTarget := []rune(target)
 	lenText := len(runeText)
