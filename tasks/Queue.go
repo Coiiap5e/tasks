@@ -1,45 +1,47 @@
 package tasks
 
-type Queue interface {
-	Enqueue(value interface{}) // Добавление элемента в конец очереди
-	Dequeue() interface{}      // Удаление и возврат элемента из начала очереди
-	Peek() interface{}         // Возврат элемента из начала без удаления
-	IsEmpty() bool             // Проверка на пустоту
-	Size() int                 // Возврат количества элементов
+type Queue[T any] interface {
+	Enqueue(value T) // Добавление элемента в конец очереди
+	Dequeue() T      // Удаление и возврат элемента из начала очереди
+	Peek() T         // Возврат элемента из начала без удаления
+	IsEmpty() bool   // Проверка на пустоту
+	Size() int       // Возврат количества элементов
 }
 
-type ArrayQueue struct {
-	elements []interface{}
+type ArrayQueue[T any] struct {
+	elements []T
 }
 
-func NewArrayQueue() *ArrayQueue {
-	return &ArrayQueue{make([]interface{}, 0)}
+func NewArrayQueue[T any]() *ArrayQueue[T] {
+	return &ArrayQueue[T]{make([]T, 0)}
 }
 
-func (q *ArrayQueue) Enqueue(value interface{}) {
+func (q *ArrayQueue[T]) Enqueue(value T) {
 	q.elements = append(q.elements, value)
 }
 
-func (q *ArrayQueue) Dequeue() interface{} {
+func (q *ArrayQueue[T]) Dequeue() T {
 	if q.IsEmpty() {
-		return nil
+		var zero T
+		return zero
 	}
 	value := q.elements[0]
 	q.elements = q.elements[1:]
 	return value
 }
 
-func (q *ArrayQueue) Peek() interface{} {
+func (q *ArrayQueue[T]) Peek() T {
 	if q.IsEmpty() {
-		return nil
+		var zero T
+		return zero
 	}
 	return q.elements[0]
 }
 
-func (q *ArrayQueue) IsEmpty() bool {
+func (q *ArrayQueue[T]) IsEmpty() bool {
 	return len(q.elements) == 0
 }
 
-func (q *ArrayQueue) Size() int {
+func (q *ArrayQueue[T]) Size() int {
 	return len(q.elements)
 }

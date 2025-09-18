@@ -1,46 +1,48 @@
 package tasks
 
-type Stack interface {
-	Push(value interface{}) // Добавление элемента на вершину стека
-	Pop() interface{}       // Удаление и возврат элемента с вершины стека
-	Peek() interface{}      // Возврат элемента с вершины без удаления
-	IsEmpty() bool          // Проверка на пустоту
-	Size() int              // Возврат количества элементов
+type Stack[T any] interface {
+	Push(value T)  // Добавление элемента на вершину стека
+	Pop() T        // Удаление и возврат элемента с вершины стека
+	Peek() T       // Возврат элемента с вершины без удаления
+	IsEmpty() bool // Проверка на пустоту
+	Size() int     // Возврат количества элементов
 }
 
-type ArrayStack struct {
-	elements []interface{}
+type ArrayStack[T any] struct {
+	elements []T
 }
 
-func NewArrayStack() *ArrayStack {
-	return &ArrayStack{elements: make([]interface{}, 0)}
+func NewArrayStack[T any]() *ArrayStack[T] {
+	return &ArrayStack[T]{elements: make([]T, 0)}
 }
 
-func (s *ArrayStack) Push(value interface{}) {
+func (s *ArrayStack[T]) Push(value T) {
 	s.elements = append(s.elements, value)
 }
 
-func (s *ArrayStack) Pop() interface{} {
+func (s *ArrayStack[T]) Pop() T {
 	if s.IsEmpty() {
-		return nil
+		var zero T
+		return zero
 	}
 	value := s.elements[len(s.elements)-1]
 	s.elements = s.elements[:len(s.elements)-1]
 	return value
 }
 
-func (s *ArrayStack) Peek() interface{} {
+func (s *ArrayStack[T]) Peek() T {
 	if s.IsEmpty() {
-		return nil
+		var zero T
+		return zero
 	}
 	return s.elements[len(s.elements)-1]
 }
 
-func (s *ArrayStack) IsEmpty() bool {
+func (s *ArrayStack[T]) IsEmpty() bool {
 	return len(s.elements) == 0
 
 }
 
-func (s *ArrayStack) Size() int {
+func (s *ArrayStack[T]) Size() int {
 	return len(s.elements)
 }
