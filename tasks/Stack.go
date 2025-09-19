@@ -12,8 +12,12 @@ type ArrayStack[T any] struct {
 	elements []T
 }
 
-func NewArrayStack[T any]() *ArrayStack[T] {
-	return &ArrayStack[T]{elements: make([]T, 0)}
+func NewArrayStack[T any](cap ...int) *ArrayStack[T] {
+	capacity := 0
+	if len(cap) > 0 {
+		capacity = cap[0]
+	}
+	return &ArrayStack[T]{elements: make([]T, 0, capacity)}
 }
 
 func (s *ArrayStack[T]) Push(value T) {

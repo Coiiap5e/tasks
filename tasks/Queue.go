@@ -12,8 +12,12 @@ type ArrayQueue[T any] struct {
 	elements []T
 }
 
-func NewArrayQueue[T any]() *ArrayQueue[T] {
-	return &ArrayQueue[T]{make([]T, 0)}
+func NewArrayQueue[T any](cap ...int) *ArrayQueue[T] {
+	capacity := 0
+	if len(cap) > 0 {
+		capacity = cap[0]
+	}
+	return &ArrayQueue[T]{make([]T, 0, capacity)}
 }
 
 func (q *ArrayQueue[T]) Enqueue(value T) {
