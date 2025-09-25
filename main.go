@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Codewars/algorithms"
 	"Codewars/tasks"
 	"fmt"
 )
@@ -118,4 +119,5 @@ func main() {
 	showAlgorithmIsBalanced()
 	showAlgorithmReverseString()
 	showAlgorithmNaiveSearch("абвгдейка", "где")
+	algorithms.RunAlgorithm()
 }
