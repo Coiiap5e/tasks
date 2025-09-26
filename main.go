@@ -6,45 +6,6 @@ import (
 	"fmt"
 )
 
-func IsBalanced(s string) bool {
-	stack := tasks.NewArrayStack[rune]()
-	map1 := map[rune]rune{
-		'}': '{',
-		']': '[',
-		')': '(',
-	}
-
-	for _, symbol := range s {
-		switch symbol {
-		case '[', '{', '(':
-			stack.Push(symbol)
-		case ']', '}', ')':
-			if stack.IsEmpty() {
-				return false
-			}
-			last := stack.Pop()
-			if last != map1[symbol] {
-				return false
-			}
-		default:
-			return false
-		}
-	}
-	return stack.IsEmpty()
-}
-
-func ReverseStrings(s string) string {
-	stack := tasks.NewArrayStack[rune](len([]rune(s)))
-	var reversedString []rune
-	for _, symbol := range s {
-		stack.Push(symbol)
-	}
-	for !stack.IsEmpty() {
-		reversedString = append(reversedString, stack.Pop())
-	}
-	return string(reversedString)
-}
-
 func showStack[T any](stack *tasks.ArrayStack[T], values ...T) {
 	fmt.Println("Проверка стека:")
 	fmt.Println("IsEmpty: ", stack.IsEmpty())
@@ -92,21 +53,21 @@ func showSet[T comparable](set *tasks.HashSet[T], deleteValue T, values ...T) {
 
 func showAlgorithmIsBalanced() {
 	fmt.Println("Алгоритм проверки скобок:")
-	fmt.Println("({[]})", IsBalanced("({[]})"))
-	fmt.Println("([)]", IsBalanced("([)]"))
-	fmt.Println("{(})", IsBalanced("{(})"))
-	fmt.Println("Пустая строка", IsBalanced(""))
-	fmt.Println("({[text]})", IsBalanced("({[text]})"))
+	fmt.Println("({[]})", algorithms.IsBalanced("({[]})"))
+	fmt.Println("([)]", algorithms.IsBalanced("([)]"))
+	fmt.Println("{(})", algorithms.IsBalanced("{(})"))
+	fmt.Println("Пустая строка", algorithms.IsBalanced(""))
+	fmt.Println("({[text]})", algorithms.IsBalanced("({[text]})"))
 }
 
 func showAlgorithmReverseString() {
 	fmt.Println("Алгоритм реверса строки Hello World:")
-	fmt.Println(ReverseStrings("Hello World!"))
+	fmt.Println(algorithms.ReverseStrings("Hello World!"))
 }
 
 func showAlgorithmNaiveSearch(text, target string) {
 	fmt.Printf("Алгортим поиска подстроки '%s', в тексте '%s' : \n", target, text)
-	fmt.Println(tasks.NaiveSearch(text, target))
+	fmt.Println(algorithms.NaiveSearch(text, target))
 }
 
 func main() {
