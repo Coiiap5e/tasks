@@ -51,25 +51,6 @@ func showSet[T comparable](set *tasks.HashSet[T], deleteValue T, values ...T) {
 	fmt.Println("Set: ", set)
 }
 
-func showAlgorithmIsBalanced() {
-	fmt.Println("Алгоритм проверки скобок:")
-	fmt.Println("({[]})", algorithms.IsBalanced("({[]})"))
-	fmt.Println("([)]", algorithms.IsBalanced("([)]"))
-	fmt.Println("{(})", algorithms.IsBalanced("{(})"))
-	fmt.Println("Пустая строка", algorithms.IsBalanced(""))
-	fmt.Println("({[text]})", algorithms.IsBalanced("({[text]})"))
-}
-
-func showAlgorithmReverseString() {
-	fmt.Println("Алгоритм реверса строки Hello World:")
-	fmt.Println(algorithms.ReverseStrings("Hello World!"))
-}
-
-func showAlgorithmNaiveSearch(text, target string) {
-	fmt.Printf("Алгортим поиска подстроки '%s', в тексте '%s' : \n", target, text)
-	fmt.Println(algorithms.NaiveSearch(text, target))
-}
-
 func main() {
 	stack := tasks.NewArrayStack[int]()
 	queue := tasks.NewArrayQueue[int]()
@@ -77,8 +58,5 @@ func main() {
 	showStack(stack, 1, 2, 3)
 	showQueue(queue, 4, 5, 6)
 	showSet(set, 5, 6, 5, 6, 8, 8)
-	showAlgorithmIsBalanced()
-	showAlgorithmReverseString()
-	showAlgorithmNaiveSearch("абвгдейка", "где")
 	algorithms.RunAlgorithm()
 }
