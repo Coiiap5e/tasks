@@ -10,7 +10,7 @@ func MajorityElement(nums []int) int {
 		if count > maxCount && count > len(nums)/2 {
 			maxCount = key
 		}
-		//Если предполагается, что главное число одно и всегда есть, то :
+		//Если предполагается, что главное число одно и всегда есть, то:
 		//if count > len(nums)/2 {
 		//	maxCount = key
 		//  break
