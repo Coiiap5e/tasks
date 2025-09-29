@@ -3,6 +3,7 @@ package main
 import (
 	"Codewars/algorithms"
 	"Codewars/structures"
+	"Codewars/tasks"
 	"fmt"
 )
 
@@ -59,4 +60,7 @@ func main() {
 	showQueue(queue, 4, 5, 6)
 	showSet(set, 5, 6, 5, 6, 8, 8)
 	algorithms.RunAlgorithm()
+	incCount, goroutineCount := 10000, 1000
+	fmt.Println("Atomic counter:", tasks.RunAtomicCounter(incCount, goroutineCount))
+	fmt.Println("Atomic counter:", tasks.RunMutexCounter(incCount, goroutineCount))
 }
