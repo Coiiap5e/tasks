@@ -1,9 +1,9 @@
 package algorithms
 
-import "Codewars/tasks"
+import "Codewars/structures"
 
 func ReverseStrings(s string) string {
-	stack := tasks.NewArrayStack[rune](len([]rune(s)))
+	stack := structures.NewArrayStack[rune](len([]rune(s)))
 	var reversedString []rune
 	for _, symbol := range s {
 		stack.Push(symbol)

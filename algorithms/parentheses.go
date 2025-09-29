@@ -1,9 +1,9 @@
 package algorithms
 
-import "Codewars/tasks"
+import "Codewars/structures"
 
 func IsBalanced(s string) bool {
-	stack := tasks.NewArrayStack[rune]()
+	stack := structures.NewArrayStack[rune]()
 	map1 := map[rune]rune{
 		'}': '{',
 		']': '[',

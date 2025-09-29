@@ -2,11 +2,11 @@ package main
 
 import (
 	"Codewars/algorithms"
-	"Codewars/tasks"
+	"Codewars/structures"
 	"fmt"
 )
 
-func showStack[T any](stack *tasks.ArrayStack[T], values ...T) {
+func showStack[T any](stack *structures.ArrayStack[T], values ...T) {
 	fmt.Println("Проверка стека:")
 	fmt.Println("IsEmpty: ", stack.IsEmpty())
 	for _, value := range values {
@@ -17,7 +17,7 @@ func showStack[T any](stack *tasks.ArrayStack[T], values ...T) {
 	fmt.Println("stack: ", stack)
 }
 
-func showQueue[T any](queue *tasks.ArrayQueue[T], values ...T) {
+func showQueue[T any](queue *structures.ArrayQueue[T], values ...T) {
 	fmt.Println("Проверка очереди:")
 	fmt.Println("IsEmpty: ", queue.IsEmpty())
 	for _, value := range values {
@@ -31,7 +31,7 @@ func showQueue[T any](queue *tasks.ArrayQueue[T], values ...T) {
 	fmt.Println("Queue: ", queue)
 }
 
-func showSet[T comparable](set *tasks.HashSet[T], deleteValue T, values ...T) {
+func showSet[T comparable](set *structures.HashSet[T], deleteValue T, values ...T) {
 	fmt.Println("Проверка сета:")
 	fmt.Println("IsEmpty: ", set.IsEmpty())
 	for _, value := range values {
@@ -52,9 +52,9 @@ func showSet[T comparable](set *tasks.HashSet[T], deleteValue T, values ...T) {
 }
 
 func main() {
-	stack := tasks.NewArrayStack[int]()
-	queue := tasks.NewArrayQueue[int]()
-	set := tasks.NewHashSet[int]()
+	stack := structures.NewArrayStack[int]()
+	queue := structures.NewArrayQueue[int]()
+	set := structures.NewHashSet[int]()
 	showStack(stack, 1, 2, 3)
 	showQueue(queue, 4, 5, 6)
 	showSet(set, 5, 6, 5, 6, 8, 8)
