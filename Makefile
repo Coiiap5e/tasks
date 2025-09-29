@@ -53,7 +53,11 @@ info:
 	@echo "Repository status"
 	@echo "Branch: $(shell git branch --show-current 2>nul)"
 	@echo "Changes: "
-	@git status --short 2>nul || echo "(no changes)"
+	@if "$(shell git status --short 2>nul)" == "" (\
+    		echo "no changes"\
+    	) else (\
+      		git status --short 2>nul\
+    	)
 	@echo "Legend:"
 	@powershell -Command "Write-Host 'R' -ForegroundColor Green -NoNewline; Write-Host 'M' -ForegroundColor Red -NoNewline; Write-Host ' - renamed'"
 	@powershell -Command "Write-Host 'M' -ForegroundColor Red -NoNewline; Write-Host ' - modified'"
