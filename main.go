@@ -59,8 +59,9 @@ func main() {
 	showStack(stack, 1, 2, 3)
 	showQueue(queue, 4, 5, 6)
 	showSet(set, 5, 6, 5, 6, 8, 8)
+	// Заглушки ф-ций
 	algorithms.RunAlgorithm()
 	incCount, goroutineCount := 10000, 1000
-	fmt.Println("Atomic counter:", tasks.RunAtomicCounter(incCount, goroutineCount))
-	fmt.Println("Atomic counter:", tasks.RunMutexCounter(incCount, goroutineCount))
+	_ = tasks.RunAtomicCounter(incCount, goroutineCount)
+	_ = tasks.RunMutexCounter(incCount, goroutineCount)
 }

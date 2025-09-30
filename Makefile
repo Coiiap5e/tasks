@@ -20,10 +20,10 @@ clean:
 	rm -rf $(TARGET_DIR)
 
 test:
-	go test ./... -v
+	go test -race ./... -v
 
 bench:
-	go test ./... -bench . -benchmem -v
+	go test -race ./... -bench . -benchmem -v
 
 info:
 	@echo "== Tasks Golang Solution =="

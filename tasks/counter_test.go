@@ -31,25 +31,25 @@ func TBRunAtomicCounter(t *testing.T, b *testing.B) {
 		expected       int64
 	}{
 		{
-			name:           "one",
+			name:           "one goroutine in which count 1 times",
 			incCount:       1,
 			goroutineCount: 1,
 			expected:       1,
 		},
 		{
-			name:           "1000 goroutine 10000 times",
+			name:           "loop 1000 goroutine in which loop a counter 10000 times",
 			incCount:       10000,
 			goroutineCount: 1000,
 			expected:       10000000,
 		},
 		{
-			name:           "500 goroutine 20000 times",
+			name:           "loop 500 goroutine in which loop a counter 20000 times",
 			incCount:       20000,
 			goroutineCount: 500,
 			expected:       10000000,
 		},
 		{
-			name:           "100 goroutine 100000 times",
+			name:           "loop 100 goroutine in which loop a counter 100000 times",
 			incCount:       100000,
 			goroutineCount: 100,
 			expected:       10000000,
@@ -60,7 +60,7 @@ func TBRunAtomicCounter(t *testing.T, b *testing.B) {
 			result := RunAtomicCounter(testCase.incCount, testCase.goroutineCount)
 			t.Logf("Calling RunAtomicCounter(%v, %v), result: %v",
 				testCase.incCount, testCase.goroutineCount, result)
-			assert.Equal(t, result, testCase.expected,
+			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("RunAtomicCounter returned %v, expected %v",
 					result, testCase.expected))
 		}
@@ -84,25 +84,25 @@ func TBRunMutexCounter(t *testing.T, b *testing.B) {
 		expected       int
 	}{
 		{
-			name:           "one",
+			name:           "one goroutine in which count 1 times",
 			incCount:       1,
 			goroutineCount: 1,
 			expected:       1,
 		},
 		{
-			name:           "1000 goroutine 10000 times",
+			name:           "loop 1000 goroutine in which loop a counter 10000 times",
 			incCount:       10000,
 			goroutineCount: 1000,
 			expected:       10000000,
 		},
 		{
-			name:           "500 goroutine 20000 times",
+			name:           "loop 500 goroutine in which loop a counter 20000 times",
 			incCount:       20000,
 			goroutineCount: 500,
 			expected:       10000000,
 		},
 		{
-			name:           "100 goroutine 100000 times",
+			name:           "loop 100 goroutine in which loop a counter 100000 times",
 			incCount:       100000,
 			goroutineCount: 100,
 			expected:       10000000,
@@ -113,7 +113,7 @@ func TBRunMutexCounter(t *testing.T, b *testing.B) {
 			result := RunMutexCounter(testCase.incCount, testCase.goroutineCount)
 			t.Logf("Calling RunMutexCounter(%v, %v), result: %v",
 				testCase.incCount, testCase.goroutineCount, result)
-			assert.Equal(t, result, testCase.expected,
+			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("RunMutexCounter returned %v, expected %v",
 					result, testCase.expected))
 		}

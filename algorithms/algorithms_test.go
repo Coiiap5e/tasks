@@ -86,22 +86,22 @@ func TBReverseStrings(t *testing.T, b *testing.B) {
 		expected string
 	}{
 		{
-			name:     "short",
+			name:     "reverse 2 short words",
 			text:     "hello world",
 			expected: "dlrow olleh",
 		},
 		{
-			name:     "empty",
+			name:     "empty string",
 			text:     "",
 			expected: "",
 		},
 		{
-			name:     "medium",
+			name:     "reverse medium string with 6 words",
 			text:     "hello world this is a test",
 			expected: "tset a si siht dlrow olleh",
 		},
 		{
-			name:     "long",
+			name:     "reverse medium string with 8 words",
 			text:     "Lorem ipsum dolor sit amet consectetur adipiscing elit",
 			expected: "tile gnicsipida rutetcesnoc tema tis rolod muspi meroL",
 		},
@@ -110,7 +110,7 @@ func TBReverseStrings(t *testing.T, b *testing.B) {
 		for _, testCase := range testTable {
 			result := ReverseStrings(testCase.text)
 			t.Logf("Calling ReverseStrings(%s), result: %s", testCase.text, result)
-			assert.Equal(t, result, testCase.expected,
+			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("ReverseStrings returned %s, expected %s",
 					result, testCase.expected))
 		}
@@ -136,7 +136,7 @@ func TBMergeSort(t *testing.T, b *testing.B) {
 		expected       []int
 	}{
 		{
-			name:           "len 6",
+			name:           "merge 2 arrays with 3 and 3 elements",
 			firstArray:     []int{1, 2, 3, 0, 0, 0},
 			lenFirstArray:  3,
 			secondArray:    []int{2, 5, 6},
@@ -144,7 +144,7 @@ func TBMergeSort(t *testing.T, b *testing.B) {
 			expected:       []int{1, 2, 2, 3, 5, 6},
 		},
 		{
-			name:           "len 12",
+			name:           "merge 2 arrays with 7 and 5 elements",
 			firstArray:     []int{1, 5, 7, 11, 15, 21, 25, 0, 0, 0, 0, 0},
 			lenFirstArray:  7,
 			secondArray:    []int{6, 14, 29, 37, 55},
@@ -152,7 +152,7 @@ func TBMergeSort(t *testing.T, b *testing.B) {
 			expected:       []int{1, 5, 6, 7, 11, 14, 15, 21, 25, 29, 37, 55},
 		},
 		{
-			name:           "empty",
+			name:           "merge 2 empty arrays",
 			firstArray:     []int{},
 			lenFirstArray:  0,
 			secondArray:    []int{},
@@ -167,7 +167,7 @@ func TBMergeSort(t *testing.T, b *testing.B) {
 			MergeSort(testCase.firstArray, testCase.lenFirstArray, testCase.secondArray, testCase.lenSecondArray)
 			result := testCase.firstArray
 			t.Logf("result: %v", result)
-			assert.Equal(t, result, testCase.expected,
+			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("MergeSort returned %v, expected %v",
 					result, testCase.expected))
 		}
@@ -190,22 +190,22 @@ func TBIsPalindromeUppercase(t *testing.T, b *testing.B) {
 		expected bool
 	}{
 		{
-			name:     "short true",
+			name:     "checking palindrome: 7 letters",
 			text:     "Rep a Per",
 			expected: true,
 		},
 		{
-			name:     "short false",
+			name:     "checking palindrome: 9 letters",
 			text:     "i am batman",
 			expected: false,
 		},
 		{
-			name:     "medium true",
+			name:     "checking palindrome: 21 letters and punctuations",
 			text:     "A man, a plan, a canal: Panama",
 			expected: true,
 		},
 		{
-			name:     "medium false",
+			name:     "checking palindrome: 18 letters",
 			text:     "Lorem ipsum dolor sit",
 			expected: false,
 		},
@@ -214,7 +214,7 @@ func TBIsPalindromeUppercase(t *testing.T, b *testing.B) {
 		for _, testCase := range testTable {
 			result := IsPalindromeUppercase(testCase.text)
 			t.Logf("Calling IsPalindromeUppercase(%s), result: %v", testCase.text, result)
-			assert.Equal(t, result, testCase.expected,
+			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("IsPalindromeUppercase returned %v, expected %v",
 					result, testCase.expected))
 		}
@@ -237,22 +237,22 @@ func TBIsPalindromeWithoutOneLetter(t *testing.T, b *testing.B) {
 		expected bool
 	}{
 		{
-			name:     "short true",
+			name:     "checking palindrome without 1 letter: 8 letters",
 			text:     "abcdcbad",
 			expected: true,
 		},
 		{
-			name:     "short false",
+			name:     "checking palindrome without 1 letter: 9 letters",
 			text:     "aebcdcbad",
 			expected: false,
 		},
 		{
-			name:     "medium true",
+			name:     "checking palindrome without 1 letter: 17 letters",
 			text:     "abcdrzhddhzrdecba",
 			expected: true,
 		},
 		{
-			name:     "medium false",
+			name:     "checking palindrome without 1 letter: 18 letters",
 			text:     "abcdrzthddhzrdecba",
 			expected: false,
 		},
@@ -261,7 +261,7 @@ func TBIsPalindromeWithoutOneLetter(t *testing.T, b *testing.B) {
 		for _, testCase := range testTable {
 			result := IsPalindromeWithoutOneLetter(testCase.text)
 			t.Logf("Calling IsPalindromeWithoutOneLetter(%s), result: %v", testCase.text, result)
-			assert.Equal(t, result, testCase.expected,
+			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("IsPalindromeWithoutOneLetter returned %v, expected %v",
 					result, testCase.expected))
 		}
@@ -285,19 +285,19 @@ func TBTwoSum(t *testing.T, b *testing.B) {
 		expected []int
 	}{
 		{
-			name:     "len 4",
+			name:     "find sum of 2 numbers on array with 4 elements",
 			nums:     []int{2, 7, 11, 15},
 			target:   9,
 			expected: []int{0, 1},
 		},
 		{
-			name:     "len 7",
+			name:     "find sum of 2 numbers on array with 7 elements",
 			nums:     []int{1, 2, 3, 5, 7, 11, 15},
 			target:   13,
 			expected: []int{1, 5},
 		},
 		{
-			name:     "len 10",
+			name:     "find sum of 2 numbers on array with 10 elements",
 			nums:     []int{1, 2, 3, 5, 7, 11, 15, 22, 25, 70},
 			target:   71,
 			expected: []int{0, 9},
@@ -307,7 +307,7 @@ func TBTwoSum(t *testing.T, b *testing.B) {
 		for _, testCase := range testTable {
 			result := TwoSum(testCase.nums, testCase.target)
 			t.Logf("Calling TwoSum(%v), result: %v", testCase.nums, result)
-			assert.Equal(t, result, testCase.expected,
+			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("TwoSum returned %v, expected %v",
 					result, testCase.expected))
 		}
@@ -330,23 +330,23 @@ func TBUniqueOccurrences(t *testing.T, b *testing.B) {
 		expected bool
 	}{
 		{
-			name:     "short true",
+			name:     "checking unique repetition occurrences in array with 6 elements",
 			arr:      []int{1, 2, 2, 1, 1, 3},
 			expected: true,
 		},
 		{
-			name:     "short false",
+			name:     "checking unique repetition occurrences in array with 5 elements",
 			arr:      []int{1, 2, 1, 1, 3},
 			expected: false,
 		},
 		{
-			name:     "medium true",
+			name:     "checking unique repetition occurrences in array with 15 elements",
 			arr:      []int{1, 2, 2, 1, 1, 3, 6, 4, 6, 4, 6, 4, 4, 6, 4},
 			expected: true,
 		},
 		{
-			name:     "medium false",
-			arr:      []int{1, 2, 2, 1, 1, 3, 6, 6, 4, 6, 4, 4, 6, 4},
+			name:     "checking unique repetition occurrences in array with 14 elements",
+			arr:      []int{1, 2, 2, 1, 3, 6, 6, 4, 6, 4, 4, 6, 4},
 			expected: false,
 		},
 	}
@@ -354,7 +354,7 @@ func TBUniqueOccurrences(t *testing.T, b *testing.B) {
 		for _, testCase := range testTable {
 			result := UniqueOccurrences(testCase.arr)
 			t.Logf("Calling UniqueOccurrences(%v), result: %v", testCase.arr, result)
-			assert.Equal(t, result, testCase.expected,
+			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("UniqueOccurrences returned %v, expected %v",
 					result, testCase.expected))
 		}
@@ -377,17 +377,17 @@ func TBMajorityElement(t *testing.T, b *testing.B) {
 		expected int
 	}{
 		{
-			name:     "short",
+			name:     "find majority element in array with 3 elements",
 			nums:     []int{3, 1, 3},
 			expected: 3,
 		},
 		{
-			name:     "medium",
+			name:     "find majority element in array with 7 elements",
 			nums:     []int{2, 2, 1, 1, 1, 2, 2},
 			expected: 2,
 		},
 		{
-			name:     "large",
+			name:     "find majority element in array with 14 elements",
 			nums:     []int{5, 5, 1, 6, 1, 5, 5, 2, 5, 5, 5, 5, 2, 8},
 			expected: 5,
 		},
@@ -396,7 +396,7 @@ func TBMajorityElement(t *testing.T, b *testing.B) {
 		for _, testCase := range testTable {
 			result := MajorityElement(testCase.nums)
 			t.Logf("Calling MajorityElement(%v), result: %v", testCase.nums, result)
-			assert.Equal(t, result, testCase.expected,
+			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("MajorityElement returned %v, expected %v",
 					result, testCase.expected))
 		}
@@ -419,22 +419,22 @@ func TBParenthesesIsBalanced(t *testing.T, b *testing.B) {
 		expected bool
 	}{
 		{
-			name:     "short true",
+			name:     "checking if parentheses are closed correctly. Positive result",
 			text:     "({[]})",
 			expected: true,
 		},
 		{
-			name:     "short false",
+			name:     "checking if parentheses are closed correctly. Negative result",
 			text:     "([)]",
 			expected: false,
 		},
 		{
-			name:     "empty",
+			name:     "checking if parentheses are closed correctly. Empty string",
 			text:     "",
 			expected: true,
 		},
 		{
-			name:     "with text",
+			name:     "checking if parentheses are closed correctly with text inside",
 			text:     "({[text]})",
 			expected: false,
 		},
@@ -443,7 +443,7 @@ func TBParenthesesIsBalanced(t *testing.T, b *testing.B) {
 		for _, testCase := range testTable {
 			result := IsBalanced(testCase.text)
 			t.Logf("Calling IsBalanced(%s), result: %v", testCase.text, result)
-			assert.Equal(t, result, testCase.expected,
+			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("IsBalanced returned %v, expected %v",
 					result, testCase.expected))
 		}
@@ -467,25 +467,25 @@ func TBNaiveSearch(t *testing.T, b *testing.B) {
 		expected int
 	}{
 		{
-			name:     "short",
+			name:     "searching for a substring in a string with 1 word",
 			text:     "абвгдейка",
 			target:   "где",
 			expected: 3,
 		},
 		{
-			name:     "large",
+			name:     "searching for a substring in a string with 8 words",
 			text:     "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 			target:   "sum",
 			expected: 8,
 		},
 		{
-			name:     "empty target",
+			name:     "searching for a empty substring in a string",
 			text:     "Набор любых слов",
 			target:   "",
 			expected: 0,
 		},
 		{
-			name:     "empty text",
+			name:     "searching for a substring in a empty string",
 			text:     "",
 			target:   "target",
 			expected: -1,
@@ -495,7 +495,7 @@ func TBNaiveSearch(t *testing.T, b *testing.B) {
 		for _, testCase := range testTable {
 			result := NaiveSearch(testCase.text, testCase.target)
 			t.Logf("Calling NaiveSearch(%s), result: %v", testCase.text, result)
-			assert.Equal(t, result, testCase.expected,
+			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("NaiveSearch returned %v, expected %v",
 					result, testCase.expected))
 		}
