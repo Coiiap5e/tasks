@@ -4,7 +4,9 @@ import (
 	"Codewars/algorithms"
 	"Codewars/structures"
 	"Codewars/tasks"
+	"context"
 	"fmt"
+	"time"
 )
 
 func showStack[T any](stack *structures.ArrayStack[T], values ...T) {
@@ -68,6 +70,51 @@ func main() {
 	algorithms.RunAlgorithm()
 
 	_ = tasks.RunAtomicCounter(incCount, goroutineCount)
-	
+
 	_ = tasks.RunMutexCounter(incCount, goroutineCount)
+
+	//Проверка контекста
+
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	go func() {
+		time.Sleep(4 * time.Second)
+		fmt.Println("CANCELLING CONTEXT!")
+		cancel() // Отменяем операцию через 4 секунды
+	}()
+	dataArray := [][]string{
+		{"data1", "data2", "data3"},
+		{"data4", "data5", "data6"},
+		{"data7", "data8", "data9"},
+	}
+
+	channelsArray := make([]chan tasks.Telemetry, len(dataArray))
+
+	for i := 0; i < len(dataArray); i++ {
+		channelsArray[i] = make(chan tasks.Telemetry, len(dataArray[i]))
+	}
+
+	for i, channel := range channelsArray {
+		go func(index int, channel chan tasks.Telemetry) {
+			defer close(channel)
+
+			for _, value := range dataArray[index] {
+				time.Sleep(1 * time.Second)
+				channel <- tasks.Telemetry{SensorData: value}
+				fmt.Printf("Sent to channel: %s (message %d)\n", value, index+1)
+			}
+		}(i, channel)
+	}
+
+	onlyReadChannels := make([]<-chan tasks.Telemetry, len(dataArray))
+	for i, channel := range channelsArray {
+		onlyReadChannels[i] = channel
+	}
+
+	mergedChan := tasks.MergeTelemetry(ctx, onlyReadChannels...)
+
+	for data := range mergedChan {
+		fmt.Println("Data: ", data)
+	}
 }

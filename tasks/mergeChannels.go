@@ -6,22 +6,34 @@ import (
 )
 
 type Telemetry struct {
-	sensorData string
+	SensorData string
 }
 
 func MergeTelemetry(ctx context.Context, sensors ...<-chan Telemetry) <-chan Telemetry {
 	var wg sync.WaitGroup
 	mergedChannels := make(chan Telemetry)
 	wg.Add(len(sensors))
-	output := func(dataChan <-chan Telemetry) {
-		for data := range dataChan {
-			mergedChannels <- data
-		}
-		wg.Done()
-	}
 
 	for _, sensor := range sensors {
-		go output(sensor)
+		go func(dataChan <-chan Telemetry) {
+			defer wg.Done()
+
+			for {
+				select {
+				case data, ok := <-dataChan:
+					if !ok {
+						return
+					}
+					select {
+					case mergedChannels <- data:
+					case <-ctx.Done():
+						return
+					}
+				case <-ctx.Done():
+					return
+				}
+			}
+		}(sensor)
 	}
 
 	go func() {
