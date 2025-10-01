@@ -7,76 +7,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// Тест функции реверса строки
 func TestReverseStrings(t *testing.T) {
 	TBReverseStrings(t, nil)
 }
 
 func BenchmarkReverseStrings(b *testing.B) {
 	TBReverseStrings(nil, b)
-}
-
-func TestMergeSort(t *testing.T) {
-	TBMergeSort(t, nil)
-}
-
-func BenchmarkMergeSort(b *testing.B) {
-	TBMergeSort(nil, b)
-}
-
-func TestIsPalindromeUppercase(t *testing.T) {
-	TBIsPalindromeUppercase(t, nil)
-}
-
-func BenchmarkIsPalindromeUppercase(b *testing.B) {
-	TBIsPalindromeUppercase(nil, b)
-}
-
-func TestIsPalindromeWithoutOneLetter(t *testing.T) {
-	TBIsPalindromeWithoutOneLetter(t, nil)
-}
-
-func BenchmarkIsPalindromeWithoutOneLetter(b *testing.B) {
-	TBIsPalindromeWithoutOneLetter(nil, b)
-}
-
-func TestTwoSum(t *testing.T) {
-	TBTwoSum(t, nil)
-}
-
-func BenchmarkTwoSum(b *testing.B) {
-	TBTwoSum(nil, b)
-}
-
-func TestUniqueOccurrences(t *testing.T) {
-	TBUniqueOccurrences(t, nil)
-}
-
-func BenchmarkUniqueOccurrences(b *testing.B) {
-	TBUniqueOccurrences(nil, b)
-}
-
-func TestMajorityElement(t *testing.T) {
-	TBMajorityElement(t, nil)
-}
-
-func BenchmarkMajorityElement(b *testing.B) {
-	TBMajorityElement(nil, b)
-}
-
-func TestParenthesesIsBalanced(t *testing.T) {
-	TBParenthesesIsBalanced(t, nil)
-}
-
-func BenchmarkParenthesesIsBalanced(b *testing.B) {
-	TBParenthesesIsBalanced(nil, b)
-}
-
-func TestNaiveSearch(t *testing.T) {
-	TBNaiveSearch(t, nil)
-}
-
-func BenchmarkNaiveSearch(b *testing.B) {
-	TBNaiveSearch(nil, b)
 }
 
 func TBReverseStrings(t *testing.T, b *testing.B) {
@@ -106,9 +43,12 @@ func TBReverseStrings(t *testing.T, b *testing.B) {
 			expected: "tile gnicsipida rutetcesnoc tema tis rolod muspi meroL",
 		},
 	}
+
 	if t != nil {
 		for _, testCase := range testTable {
+
 			result := ReverseStrings(testCase.text)
+
 			t.Logf("Calling ReverseStrings(%s), result: %s", testCase.text, result)
 			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("ReverseStrings returned %s, expected %s",
@@ -124,6 +64,15 @@ func TBReverseStrings(t *testing.T, b *testing.B) {
 			})
 		}
 	}
+}
+
+// Тест алгоритма сортировки слиянием
+func TestMergeSort(t *testing.T) {
+	TBMergeSort(t, nil)
+}
+
+func BenchmarkMergeSort(b *testing.B) {
+	TBMergeSort(nil, b)
 }
 
 func TBMergeSort(t *testing.T, b *testing.B) {
@@ -162,9 +111,12 @@ func TBMergeSort(t *testing.T, b *testing.B) {
 	}
 	if t != nil {
 		for _, testCase := range testTable {
+
 			t.Logf("Calling MergeSort(%v, %v)",
 				testCase.firstArray, testCase.secondArray)
+
 			MergeSort(testCase.firstArray, testCase.lenFirstArray, testCase.secondArray, testCase.lenSecondArray)
+
 			result := testCase.firstArray
 			t.Logf("result: %v", result)
 			assert.Equal(t, testCase.expected, result,
@@ -181,6 +133,15 @@ func TBMergeSort(t *testing.T, b *testing.B) {
 			})
 		}
 	}
+}
+
+// Тест ф-ции на проверку палиндрома без учета регистра и знаков
+func TestIsPalindromeUppercase(t *testing.T) {
+	TBIsPalindromeUppercase(t, nil)
+}
+
+func BenchmarkIsPalindromeUppercase(b *testing.B) {
+	TBIsPalindromeUppercase(nil, b)
 }
 
 func TBIsPalindromeUppercase(t *testing.T, b *testing.B) {
@@ -212,7 +173,9 @@ func TBIsPalindromeUppercase(t *testing.T, b *testing.B) {
 	}
 	if t != nil {
 		for _, testCase := range testTable {
+
 			result := IsPalindromeUppercase(testCase.text)
+
 			t.Logf("Calling IsPalindromeUppercase(%s), result: %v", testCase.text, result)
 			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("IsPalindromeUppercase returned %v, expected %v",
@@ -228,6 +191,15 @@ func TBIsPalindromeUppercase(t *testing.T, b *testing.B) {
 			})
 		}
 	}
+}
+
+// Тест ф-ции на проверку палиндрома с возможностью удаления одного символа
+func TestIsPalindromeWithoutOneLetter(t *testing.T) {
+	TBIsPalindromeWithoutOneLetter(t, nil)
+}
+
+func BenchmarkIsPalindromeWithoutOneLetter(b *testing.B) {
+	TBIsPalindromeWithoutOneLetter(nil, b)
 }
 
 func TBIsPalindromeWithoutOneLetter(t *testing.T, b *testing.B) {
@@ -259,7 +231,9 @@ func TBIsPalindromeWithoutOneLetter(t *testing.T, b *testing.B) {
 	}
 	if t != nil {
 		for _, testCase := range testTable {
+
 			result := IsPalindromeWithoutOneLetter(testCase.text)
+
 			t.Logf("Calling IsPalindromeWithoutOneLetter(%s), result: %v", testCase.text, result)
 			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("IsPalindromeWithoutOneLetter returned %v, expected %v",
@@ -275,6 +249,15 @@ func TBIsPalindromeWithoutOneLetter(t *testing.T, b *testing.B) {
 			})
 		}
 	}
+}
+
+// Тест ф-ции поиска суммы двух чисел из одного среза
+func TestTwoSum(t *testing.T) {
+	TBTwoSum(t, nil)
+}
+
+func BenchmarkTwoSum(b *testing.B) {
+	TBTwoSum(nil, b)
 }
 
 func TBTwoSum(t *testing.T, b *testing.B) {
@@ -305,7 +288,9 @@ func TBTwoSum(t *testing.T, b *testing.B) {
 	}
 	if t != nil {
 		for _, testCase := range testTable {
+
 			result := TwoSum(testCase.nums, testCase.target)
+
 			t.Logf("Calling TwoSum(%v), result: %v", testCase.nums, result)
 			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("TwoSum returned %v, expected %v",
@@ -321,6 +306,15 @@ func TBTwoSum(t *testing.T, b *testing.B) {
 			})
 		}
 	}
+}
+
+// Тест ф-ции проверки уникальности повторения чисел
+func TestUniqueOccurrences(t *testing.T) {
+	TBUniqueOccurrences(t, nil)
+}
+
+func BenchmarkUniqueOccurrences(b *testing.B) {
+	TBUniqueOccurrences(nil, b)
 }
 
 func TBUniqueOccurrences(t *testing.T, b *testing.B) {
@@ -352,7 +346,9 @@ func TBUniqueOccurrences(t *testing.T, b *testing.B) {
 	}
 	if t != nil {
 		for _, testCase := range testTable {
+
 			result := UniqueOccurrences(testCase.arr)
+
 			t.Logf("Calling UniqueOccurrences(%v), result: %v", testCase.arr, result)
 			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("UniqueOccurrences returned %v, expected %v",
@@ -368,6 +364,15 @@ func TBUniqueOccurrences(t *testing.T, b *testing.B) {
 			})
 		}
 	}
+}
+
+// Тест ф-ции нахождения главного числа среза
+func TestMajorityElement(t *testing.T) {
+	TBMajorityElement(t, nil)
+}
+
+func BenchmarkMajorityElement(b *testing.B) {
+	TBMajorityElement(nil, b)
 }
 
 func TBMajorityElement(t *testing.T, b *testing.B) {
@@ -394,7 +399,9 @@ func TBMajorityElement(t *testing.T, b *testing.B) {
 	}
 	if t != nil {
 		for _, testCase := range testTable {
+
 			result := MajorityElement(testCase.nums)
+
 			t.Logf("Calling MajorityElement(%v), result: %v", testCase.nums, result)
 			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("MajorityElement returned %v, expected %v",
@@ -410,6 +417,15 @@ func TBMajorityElement(t *testing.T, b *testing.B) {
 			})
 		}
 	}
+}
+
+// Тест ф-ции проверки правильности закрытия скобок
+func TestParenthesesIsBalanced(t *testing.T) {
+	TBParenthesesIsBalanced(t, nil)
+}
+
+func BenchmarkParenthesesIsBalanced(b *testing.B) {
+	TBParenthesesIsBalanced(nil, b)
 }
 
 func TBParenthesesIsBalanced(t *testing.T, b *testing.B) {
@@ -441,7 +457,9 @@ func TBParenthesesIsBalanced(t *testing.T, b *testing.B) {
 	}
 	if t != nil {
 		for _, testCase := range testTable {
+
 			result := IsBalanced(testCase.text)
+
 			t.Logf("Calling IsBalanced(%s), result: %v", testCase.text, result)
 			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("IsBalanced returned %v, expected %v",
@@ -457,6 +475,15 @@ func TBParenthesesIsBalanced(t *testing.T, b *testing.B) {
 			})
 		}
 	}
+}
+
+// Тест алгоритма поиска подстроки в строке
+func TestNaiveSearch(t *testing.T) {
+	TBNaiveSearch(t, nil)
+}
+
+func BenchmarkNaiveSearch(b *testing.B) {
+	TBNaiveSearch(nil, b)
 }
 
 func TBNaiveSearch(t *testing.T, b *testing.B) {
@@ -493,7 +520,9 @@ func TBNaiveSearch(t *testing.T, b *testing.B) {
 	}
 	if t != nil {
 		for _, testCase := range testTable {
+
 			result := NaiveSearch(testCase.text, testCase.target)
+
 			t.Logf("Calling NaiveSearch(%s), result: %v", testCase.text, result)
 			assert.Equal(t, testCase.expected, result,
 				fmt.Sprintf("NaiveSearch returned %v, expected %v",

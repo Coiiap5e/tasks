@@ -56,12 +56,18 @@ func main() {
 	stack := structures.NewArrayStack[int]()
 	queue := structures.NewArrayQueue[int]()
 	set := structures.NewHashSet[int]()
+	incCount, goroutineCount := 10000, 1000
+
 	showStack(stack, 1, 2, 3)
+
 	showQueue(queue, 4, 5, 6)
+
 	showSet(set, 5, 6, 5, 6, 8, 8)
+
 	// Заглушки ф-ций
 	algorithms.RunAlgorithm()
-	incCount, goroutineCount := 10000, 1000
+
 	_ = tasks.RunAtomicCounter(incCount, goroutineCount)
+	
 	_ = tasks.RunMutexCounter(incCount, goroutineCount)
 }

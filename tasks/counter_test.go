@@ -7,20 +7,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// Тест счетчика, реализуемый через атомики и который работает с множества горутин
 func TestRunAtomicCounter(t *testing.T) {
 	TBRunAtomicCounter(t, nil)
 }
 
 func BenchmarkRunAtomicCounter(b *testing.B) {
 	TBRunAtomicCounter(nil, b)
-}
-
-func TestRunMutexCounter(t *testing.T) {
-	TBRunMutexCounter(t, nil)
-}
-
-func BenchmarkRunMutexCounter(b *testing.B) {
-	TBRunMutexCounter(nil, b)
 }
 
 func TBRunAtomicCounter(t *testing.T, b *testing.B) {
@@ -57,7 +50,9 @@ func TBRunAtomicCounter(t *testing.T, b *testing.B) {
 	}
 	if t != nil {
 		for _, testCase := range testTable {
+
 			result := RunAtomicCounter(testCase.incCount, testCase.goroutineCount)
+
 			t.Logf("Calling RunAtomicCounter(%v, %v), result: %v",
 				testCase.incCount, testCase.goroutineCount, result)
 			assert.Equal(t, testCase.expected, result,
@@ -74,6 +69,15 @@ func TBRunAtomicCounter(t *testing.T, b *testing.B) {
 			})
 		}
 	}
+}
+
+// Тест счетчика, реализуемый через мьютексы и который работает с множества горутин
+func TestRunMutexCounter(t *testing.T) {
+	TBRunMutexCounter(t, nil)
+}
+
+func BenchmarkRunMutexCounter(b *testing.B) {
+	TBRunMutexCounter(nil, b)
 }
 
 func TBRunMutexCounter(t *testing.T, b *testing.B) {
@@ -110,7 +114,9 @@ func TBRunMutexCounter(t *testing.T, b *testing.B) {
 	}
 	if t != nil {
 		for _, testCase := range testTable {
+
 			result := RunMutexCounter(testCase.incCount, testCase.goroutineCount)
+
 			t.Logf("Calling RunMutexCounter(%v, %v), result: %v",
 				testCase.incCount, testCase.goroutineCount, result)
 			assert.Equal(t, testCase.expected, result,
