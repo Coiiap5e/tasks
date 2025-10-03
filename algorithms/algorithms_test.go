@@ -55,6 +55,7 @@ func TBReverseStrings(t *testing.T, b *testing.B) {
 					result, testCase.expected))
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			b.Run(testCase.name, func(b *testing.B) {
@@ -109,6 +110,7 @@ func TBMergeSort(t *testing.T, b *testing.B) {
 			expected:       []int{},
 		},
 	}
+
 	if t != nil {
 		for _, testCase := range testTable {
 
@@ -124,6 +126,7 @@ func TBMergeSort(t *testing.T, b *testing.B) {
 					result, testCase.expected))
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			b.Run(testCase.name, func(b *testing.B) {
@@ -171,6 +174,7 @@ func TBIsPalindromeUppercase(t *testing.T, b *testing.B) {
 			expected: false,
 		},
 	}
+
 	if t != nil {
 		for _, testCase := range testTable {
 
@@ -182,6 +186,7 @@ func TBIsPalindromeUppercase(t *testing.T, b *testing.B) {
 					result, testCase.expected))
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			b.Run(testCase.name, func(b *testing.B) {
@@ -229,6 +234,7 @@ func TBIsPalindromeWithoutOneLetter(t *testing.T, b *testing.B) {
 			expected: false,
 		},
 	}
+
 	if t != nil {
 		for _, testCase := range testTable {
 
@@ -240,6 +246,7 @@ func TBIsPalindromeWithoutOneLetter(t *testing.T, b *testing.B) {
 					result, testCase.expected))
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			b.Run(testCase.name, func(b *testing.B) {
@@ -286,6 +293,7 @@ func TBTwoSum(t *testing.T, b *testing.B) {
 			expected: []int{0, 9},
 		},
 	}
+
 	if t != nil {
 		for _, testCase := range testTable {
 
@@ -297,6 +305,7 @@ func TBTwoSum(t *testing.T, b *testing.B) {
 					result, testCase.expected))
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			b.Run(testCase.name, func(b *testing.B) {
@@ -344,6 +353,7 @@ func TBUniqueOccurrences(t *testing.T, b *testing.B) {
 			expected: false,
 		},
 	}
+
 	if t != nil {
 		for _, testCase := range testTable {
 
@@ -355,6 +365,7 @@ func TBUniqueOccurrences(t *testing.T, b *testing.B) {
 					result, testCase.expected))
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			b.Run(testCase.name, func(b *testing.B) {
@@ -397,6 +408,7 @@ func TBMajorityElement(t *testing.T, b *testing.B) {
 			expected: 5,
 		},
 	}
+
 	if t != nil {
 		for _, testCase := range testTable {
 
@@ -408,6 +420,7 @@ func TBMajorityElement(t *testing.T, b *testing.B) {
 					result, testCase.expected))
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			b.Run(testCase.name, func(b *testing.B) {
@@ -455,6 +468,7 @@ func TBParenthesesIsBalanced(t *testing.T, b *testing.B) {
 			expected: false,
 		},
 	}
+
 	if t != nil {
 		for _, testCase := range testTable {
 
@@ -466,6 +480,7 @@ func TBParenthesesIsBalanced(t *testing.T, b *testing.B) {
 					result, testCase.expected))
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			b.Run(testCase.name, func(b *testing.B) {
@@ -518,6 +533,7 @@ func TBNaiveSearch(t *testing.T, b *testing.B) {
 			expected: -1,
 		},
 	}
+
 	if t != nil {
 		for _, testCase := range testTable {
 
@@ -529,6 +545,7 @@ func TBNaiveSearch(t *testing.T, b *testing.B) {
 					result, testCase.expected))
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			b.Run(testCase.name, func(b *testing.B) {
