@@ -99,10 +99,16 @@ func TBMergeTelemetry(t *testing.T, b *testing.B) {
 			// вызов ключевой ф-ции
 			mergedChan := MergeTelemetry(ctx, onlyReadChannels...)
 
+			result := false
+
+			if len(dataResult) == 0 {
+				result = true
+			}
+
 			for data := range mergedChan {
 				dataResult[data]--
 			}
-			result := false
+
 			for _, data := range dataResult {
 				if data != 0 {
 					result = false
