@@ -61,7 +61,7 @@ func TBMergeTelemetry(t *testing.T, b *testing.B) {
 			channelsArray := make([]chan Telemetry, len(testCase.dataArray))
 
 			for i := 0; i < len(testCase.dataArray); i++ {
-				channelsArray[i] = make(chan Telemetry, len(testCase.dataArray[i]))
+				channelsArray[i] = make(chan Telemetry)
 			}
 
 			var wg sync.WaitGroup
@@ -95,7 +95,7 @@ func TBMergeTelemetry(t *testing.T, b *testing.B) {
 					dataResult[key]++
 				}
 			}
-			
+
 			// вызов ключевой ф-ции
 			mergedChan := MergeTelemetry(ctx, onlyReadChannels...)
 
@@ -149,7 +149,7 @@ func TBMergeTelemetry(t *testing.T, b *testing.B) {
 			channelsArray := make([]chan Telemetry, len(testCase.dataArray))
 
 			for i := 0; i < len(testCase.dataArray); i++ {
-				channelsArray[i] = make(chan Telemetry, len(testCase.dataArray[i]))
+				channelsArray[i] = make(chan Telemetry)
 			}
 
 			for i, channel := range channelsArray {
