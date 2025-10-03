@@ -95,7 +95,8 @@ func TBMergeTelemetry(t *testing.T, b *testing.B) {
 					dataResult[key]++
 				}
 			}
-
+			
+			// вызов ключевой ф-ции
 			mergedChan := MergeTelemetry(ctx, onlyReadChannels...)
 
 			for data := range mergedChan {
@@ -142,6 +143,7 @@ func TBMergeTelemetry(t *testing.T, b *testing.B) {
 
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			channelsArray := make([]chan Telemetry, len(testCase.dataArray))
@@ -165,6 +167,7 @@ func TBMergeTelemetry(t *testing.T, b *testing.B) {
 			for i, channel := range channelsArray {
 				onlyReadChannels[i] = channel
 			}
+
 			b.Run(testCase.name, func(b *testing.B) {
 				for i := 0; i < b.N; i++ {
 					MergeTelemetry(ctx, onlyReadChannels...)

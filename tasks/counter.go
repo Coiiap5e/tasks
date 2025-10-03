@@ -38,23 +38,23 @@ func (a *AtomicCounter) AtomicRepeat(n int) {
 	for i := 0; i < n; i++ {
 		atomic.AddInt64(&a.counter, 1)
 	}
-	wg.Done()
 }
 
 func (m *MutexCounter) MutexRepeat(n int) {
 	for i := 0; i < n; i++ {
 		m.Inc(1)
 	}
-	wg.Done()
 }
-
-var wg sync.WaitGroup
 
 func RunAtomicCounter(incCount, goroutineCount int) int64 {
 	var atomicCounter AtomicCounter
+	var wg sync.WaitGroup
 	for i := 0; i < goroutineCount; i++ {
 		wg.Add(1)
-		go atomicCounter.AtomicRepeat(incCount)
+		go func() {
+			defer wg.Done()
+			atomicCounter.AtomicRepeat(incCount)
+		}()
 	}
 	wg.Wait()
 	return atomicCounter.Get()
@@ -62,9 +62,13 @@ func RunAtomicCounter(incCount, goroutineCount int) int64 {
 
 func RunMutexCounter(incCount, goroutineCount int) int {
 	var mutexCounter MutexCounter
+	var wg sync.WaitGroup
 	for i := 0; i < goroutineCount; i++ {
 		wg.Add(1)
-		go mutexCounter.MutexRepeat(incCount)
+		go func() {
+			defer wg.Done()
+			mutexCounter.MutexRepeat(incCount)
+		}()
 	}
 	wg.Wait()
 	return mutexCounter.Get()

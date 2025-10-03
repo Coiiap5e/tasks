@@ -36,18 +36,19 @@ func TBRunAtomicCounter(t *testing.T, b *testing.B) {
 			expected:       10000000,
 		},
 		{
-			name:           "loop 500 goroutine in which loop a counter 20000 times",
-			incCount:       20000,
-			goroutineCount: 500,
-			expected:       10000000,
+			name:           "loop 5000 goroutine in which loop a counter 1000 times",
+			incCount:       1000,
+			goroutineCount: 5000,
+			expected:       5000000,
 		},
 		{
-			name:           "loop 100 goroutine in which loop a counter 100000 times",
-			incCount:       100000,
+			name:           "loop 100 goroutine in which loop a counter 400000 times",
+			incCount:       400000,
 			goroutineCount: 100,
-			expected:       10000000,
+			expected:       40000000,
 		},
 	}
+
 	if t != nil {
 		for _, testCase := range testTable {
 
@@ -60,6 +61,7 @@ func TBRunAtomicCounter(t *testing.T, b *testing.B) {
 					result, testCase.expected))
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			b.Run(testCase.name, func(b *testing.B) {
@@ -100,18 +102,19 @@ func TBRunMutexCounter(t *testing.T, b *testing.B) {
 			expected:       10000000,
 		},
 		{
-			name:           "loop 500 goroutine in which loop a counter 20000 times",
-			incCount:       20000,
-			goroutineCount: 500,
-			expected:       10000000,
+			name:           "loop 5000 goroutine in which loop a counter 1000 times",
+			incCount:       1000,
+			goroutineCount: 5000,
+			expected:       5000000,
 		},
 		{
-			name:           "loop 100 goroutine in which loop a counter 100000 times",
-			incCount:       100000,
+			name:           "loop 100 goroutine in which loop a counter 400000 times",
+			incCount:       400000,
 			goroutineCount: 100,
-			expected:       10000000,
+			expected:       40000000,
 		},
 	}
+
 	if t != nil {
 		for _, testCase := range testTable {
 
@@ -124,6 +127,7 @@ func TBRunMutexCounter(t *testing.T, b *testing.B) {
 					result, testCase.expected))
 		}
 	}
+
 	if b != nil {
 		for _, testCase := range testTable {
 			b.Run(testCase.name, func(b *testing.B) {
