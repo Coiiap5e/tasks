@@ -102,10 +102,12 @@ func TBMergeTelemetry(t *testing.T, b *testing.B) {
 			for data := range mergedChan {
 				dataResult[data]--
 			}
-			result := true
+			result := false
 			for _, data := range dataResult {
 				if data != 0 {
 					result = false
+				} else {
+					result = true
 				}
 			}
 
