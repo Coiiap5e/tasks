@@ -54,6 +54,14 @@ func TBMergeTelemetry(t *testing.T, b *testing.B) {
 			},
 			expected: true,
 		},
+		{
+			name: "two channels with empty data each",
+			dataArray: [][]string{
+				{},
+				{},
+			},
+			expected: true,
+		},
 	}
 
 	if t != nil {
