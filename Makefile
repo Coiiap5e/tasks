@@ -3,18 +3,31 @@ TARGET_DIR =  bin # имя папки для бинарников
 SRC_MAIN = main.go # имя файла с главной функцией
 .DEFAULT_GOAL := run
 
-.PHONY: build build-all run clean test bench info
+.PHONY: build build-windows build-darwin build-linux run-darwin run-linux run-windows run clean test bench info
 
 build:
 	go build -o $(TARGET_DIR)/$(BINARY_NAME) $(SRC_MAIN)
-build-all:
-	GOARCH=amd64 GOOS=windows go build -o $(TARGET_DIR)/$(BINARY_NAME)-windows.exe $(SRC_MAIN)
-	GOARCH=amd64 GOOS=darwin go build -o $(TARGET_DIR)/$(BINARY_NAME)-darwin $(SRC_MAIN)
-	GOARCH=amd64 GOOS=linux go build -o $(TARGET_DIR)/$(BINARY_NAME)-linux $(SRC_MAIN)
 
+build-windows:
+	GOARCH=amd64 GOOS=windows go build -o $(TARGET_DIR)/$(BINARY_NAME)-windows.exe $(SRC_MAIN)
+
+build-darwin:
+	GOARCH=amd64 GOOS=darwin go build -o $(TARGET_DIR)/$(BINARY_NAME)-darwin $(SRC_MAIN)
+
+build-linux:
+	GOARCH=amd64 GOOS=linux go build -o $(TARGET_DIR)/$(BINARY_NAME)-linux $(SRC_MAIN)
 
 run: build
 	./$(TARGET_DIR)/$(BINARY_NAME)
+
+run-windows: build-windows
+	./$(TARGET_DIR)/$(BINARY_NAME)-windows.exe
+
+run-darwin: build-darwin
+	./$(TARGET_DIR)/$(BINARY_NAME)-darwin
+
+run-linux: build-linux
+	./$(TARGET_DIR)/$(BINARY_NAME)-linux
 
 clean:
 	rm -rf $(TARGET_DIR)

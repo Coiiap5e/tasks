@@ -4,7 +4,7 @@ import "Codewars/structures"
 
 func IsBalanced(s string) bool {
 	stack := structures.NewArrayStack[rune]()
-	map1 := map[rune]rune{
+	parenthesesStructure := map[rune]rune{
 		'}': '{',
 		']': '[',
 		')': '(',
@@ -18,8 +18,7 @@ func IsBalanced(s string) bool {
 			if stack.IsEmpty() {
 				return false
 			}
-			last := stack.Pop()
-			if last != map1[symbol] {
+			if stack.Pop() != parenthesesStructure[symbol] {
 				return false
 			}
 		default:

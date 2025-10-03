@@ -14,10 +14,8 @@ func TwoSum(nums []int, target int) []int {
 	diff := make(map[int]int)
 	for index, value := range nums {
 		diff[target-value] = index
-	}
-	for index, value := range nums {
 		if result, exists := diff[value]; exists && result != index {
-			return []int{index, result}
+			return []int{result, index}
 		}
 	}
 	return []int{}
