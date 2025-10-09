@@ -1,50 +1,15 @@
 package main
 
 import (
+	"Codewars/algorithms"
+	"Codewars/structures"
 	"Codewars/tasks"
+	"context"
 	"fmt"
+	"time"
 )
 
-func IsBalanced(s string) bool {
-	stack := tasks.NewArrayStack[rune]()
-	map1 := map[rune]rune{
-		'}': '{',
-		']': '[',
-		')': '(',
-	}
-
-	for _, symbol := range s {
-		switch symbol {
-		case '[', '{', '(':
-			stack.Push(symbol)
-		case ']', '}', ')':
-			if stack.IsEmpty() {
-				return false
-			}
-			last := stack.Pop()
-			if last != map1[symbol] {
-				return false
-			}
-		default:
-			return false
-		}
-	}
-	return stack.IsEmpty()
-}
-
-func ReverseStrings(s string) string {
-	stack := tasks.NewArrayStack[rune](len([]rune(s)))
-	var reversedString []rune
-	for _, symbol := range s {
-		stack.Push(symbol)
-	}
-	for !stack.IsEmpty() {
-		reversedString = append(reversedString, stack.Pop())
-	}
-	return string(reversedString)
-}
-
-func showStack[T any](stack *tasks.ArrayStack[T], values ...T) {
+func showStack[T any](stack *structures.ArrayStack[T], values ...T) {
 	fmt.Println("Проверка стека:")
 	fmt.Println("IsEmpty: ", stack.IsEmpty())
 	for _, value := range values {
@@ -55,7 +20,7 @@ func showStack[T any](stack *tasks.ArrayStack[T], values ...T) {
 	fmt.Println("stack: ", stack)
 }
 
-func showQueue[T any](queue *tasks.ArrayQueue[T], values ...T) {
+func showQueue[T any](queue *structures.ArrayQueue[T], values ...T) {
 	fmt.Println("Проверка очереди:")
 	fmt.Println("IsEmpty: ", queue.IsEmpty())
 	for _, value := range values {
@@ -69,7 +34,7 @@ func showQueue[T any](queue *tasks.ArrayQueue[T], values ...T) {
 	fmt.Println("Queue: ", queue)
 }
 
-func showSet[T comparable](set *tasks.HashSet[T], deleteValue T, values ...T) {
+func showSet[T comparable](set *structures.HashSet[T], deleteValue T, values ...T) {
 	fmt.Println("Проверка сета:")
 	fmt.Println("IsEmpty: ", set.IsEmpty())
 	for _, value := range values {
@@ -89,33 +54,67 @@ func showSet[T comparable](set *tasks.HashSet[T], deleteValue T, values ...T) {
 	fmt.Println("Set: ", set)
 }
 
-func showAlgorithmIsBalanced() {
-	fmt.Println("Алгоритм проверки скобок:")
-	fmt.Println("({[]})", IsBalanced("({[]})"))
-	fmt.Println("([)]", IsBalanced("([)]"))
-	fmt.Println("{(})", IsBalanced("{(})"))
-	fmt.Println("Пустая строка", IsBalanced(""))
-	fmt.Println("({[text]})", IsBalanced("({[text]})"))
-}
-
-func showAlgorithmReverseString() {
-	fmt.Println("Алгоритм реверса строки Hello World:")
-	fmt.Println(ReverseStrings("Hello World!"))
-}
-
-func showAlgorithmNaiveSearch(text, target string) {
-	fmt.Printf("Алгортим поиска подстроки '%s', в тексте '%s' : \n", target, text)
-	fmt.Println(tasks.NaiveSearch(text, target))
-}
-
 func main() {
-	stack := tasks.NewArrayStack[int]()
-	queue := tasks.NewArrayQueue[int]()
-	set := tasks.NewHashSet[int]()
+	stack := structures.NewArrayStack[int]()
+	queue := structures.NewArrayQueue[int]()
+	set := structures.NewHashSet[int]()
+	incCount, goroutineCount := 10000, 1000
+
 	showStack(stack, 1, 2, 3)
+
 	showQueue(queue, 4, 5, 6)
+
 	showSet(set, 5, 6, 5, 6, 8, 8)
-	showAlgorithmIsBalanced()
-	showAlgorithmReverseString()
-	showAlgorithmNaiveSearch("абвгдейка", "где")
+
+	// Заглушки ф-ций
+	algorithms.RunAlgorithm()
+
+	_ = tasks.RunAtomicCounter(incCount, goroutineCount)
+
+	_ = tasks.RunMutexCounter(incCount, goroutineCount)
+
+	//Проверка контекста
+
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	go func() {
+		time.Sleep(4 * time.Second)
+		fmt.Println("CANCELLING CONTEXT!")
+		cancel() // Отменяем операцию через 4 секунды
+	}()
+	dataArray := [][]string{
+		{"data1", "data2", "data3"},
+		{"data4", "data5", "data6"},
+		{"data7", "data8", "data9"},
+	}
+
+	channelsArray := make([]chan tasks.Telemetry, len(dataArray))
+
+	for i := 0; i < len(dataArray); i++ {
+		channelsArray[i] = make(chan tasks.Telemetry, len(dataArray[i]))
+	}
+
+	for i, channel := range channelsArray {
+		go func(index int, channel chan tasks.Telemetry) {
+			defer close(channel)
+
+			for _, value := range dataArray[index] {
+				time.Sleep(1 * time.Second)
+				channel <- tasks.Telemetry{SensorData: value}
+				fmt.Printf("Sent to channel: %s (message %d)\n", value, index+1)
+			}
+		}(i, channel)
+	}
+
+	onlyReadChannels := make([]<-chan tasks.Telemetry, len(dataArray))
+	for i, channel := range channelsArray {
+		onlyReadChannels[i] = channel
+	}
+
+	mergedChan := tasks.MergeTelemetry(ctx, onlyReadChannels...)
+
+	for data := range mergedChan {
+		fmt.Println("Data: ", data)
+	}
 }

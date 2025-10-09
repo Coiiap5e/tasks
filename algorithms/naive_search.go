@@ -1,4 +1,4 @@
-package tasks
+package algorithms
 
 func NaiveSearch(text, target string) int {
 	// тест
