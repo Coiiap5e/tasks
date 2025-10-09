@@ -556,3 +556,5 @@ func TBNaiveSearch(t *testing.T, b *testing.B) {
 		}
 	}
 }
+
+// TODO: add 4 test for 4 new algorithms
