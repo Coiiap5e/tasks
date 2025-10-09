@@ -23,4 +23,14 @@ func RunAlgorithm() {
 	_ = ReverseStrings("Hello World!")
 
 	_ = NaiveSearch(s2, "cba")
+
+	words := []string{"hello", "leetcode"}
+	_ = IsAlienSorted(words, "hlabcdefgijkmnopqrstuvwxyz")
+
+	_ = IsAnagram("anagram", "nagaram")
+
+	arr3 := []int{1, 0, 0, 2, 0, 3}
+	MoveZeroes(arr3)
+
+	_ = RemoveDuplicates([]int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4})
 }
