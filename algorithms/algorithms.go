@@ -33,4 +33,13 @@ func RunAlgorithm() {
 	MoveZeroes(arr3)
 
 	_ = RemoveDuplicates([]int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4})
+
+	arr4 := []int{1, 2, 5, 7, 12, 15, 25, 32, 33, 42, 51, 63}
+
+	_ = BinarySearch(arr4, 5)
+
+	_ = FirstBadVersion(arr4)
+
+	_ = RoundedSqrt(8)
+
 }

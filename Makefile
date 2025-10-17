@@ -42,7 +42,7 @@ info:
 	@echo "== Tasks Golang Solution =="
 	@echo ""
 	@echo "Go Version:"
-	@go version | cut -d' ' -f3
+	@go version
 	@echo ""
 	@echo "Module Info:"
 	@echo " Name: $(shell go list -m)"
