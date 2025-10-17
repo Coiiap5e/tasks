@@ -557,4 +557,163 @@ func TBNaiveSearch(t *testing.T, b *testing.B) {
 	}
 }
 
-// TODO: add 4 test for 4 new algorithms
+// Тест алгоритма проверки анаграммы
+func TestIsAnagram(t *testing.T) {
+	// Given
+	testTable := []struct {
+		name     string
+		text     string
+		target   string
+		expected bool
+	}{
+		{
+			name:     "Word with 9 char. Positive result",
+			text:     "milkshake",
+			target:   "akeshklim",
+			expected: true,
+		},
+		{
+			name:     "Word with 9 char. Negative result",
+			text:     "milkshake",
+			target:   "akeswklim",
+			expected: false,
+		},
+		{
+			name:     "Words with different length",
+			text:     "milkshake",
+			target:   "akehklim",
+			expected: false,
+		},
+	}
+
+	for _, testCase := range testTable {
+		//When
+		result := IsAnagram(testCase.text, testCase.target)
+
+		//Then
+		t.Logf("calling IsAnagram(%s, %s), result: %v", testCase.text, testCase.target, result)
+		assert.Equal(t, testCase.expected, result,
+			fmt.Sprintf("IsAnagram returned %v, expected %v",
+				result, testCase.expected))
+	}
+
+}
+
+// Тест алгоритма проверки сортировки слов согласно "alien" словарю
+func TestIsAlienSorted(t *testing.T) {
+	// Given
+	testTable := []struct {
+		name     string
+		words    []string
+		order    string
+		expected bool
+	}{
+		{
+			name:     "2 Words. Positive result",
+			words:    []string{"hello", "leetcode"},
+			order:    "hlabcdefgijkmnopqrstuvwxyz",
+			expected: true,
+		},
+		{
+			name:     "3 Words. Negative result",
+			words:    []string{"word", "world", "row"},
+			order:    "worldabcefghijkmnpqstuvxyz",
+			expected: false,
+		},
+		{
+			name:     "2 Words. Negative result",
+			words:    []string{"apple", "app"},
+			order:    "abcdefghijklmnopqrstuvwxyz",
+			expected: false,
+		},
+	}
+
+	for _, testCase := range testTable {
+		//When
+		result := IsAlienSorted(testCase.words, testCase.order)
+
+		//Then
+		t.Logf("calling IsAlienSorted(%s, %s), result: %v", testCase.words, testCase.order, result)
+		assert.Equal(t, testCase.expected, result,
+			fmt.Sprintf("IsAlienSorted returned %v, expected %v",
+				result, testCase.expected))
+	}
+
+}
+
+// Тест алгоритма сдвига нулей в конец среза
+func TestMoveZeroes(t *testing.T) {
+	// Given
+	testTable := []struct {
+		name     string
+		nums     []int
+		expected []int
+	}{
+		{
+			name:     "Array with length 5 and 2 zeros",
+			nums:     []int{0, 1, 0, 3, 12},
+			expected: []int{1, 3, 12, 0, 0},
+		},
+		{
+			name:     "Array with length 1 and 1 zeros",
+			nums:     []int{0},
+			expected: []int{0},
+		},
+		{
+			name:     "Array with length 13 and 5 zeros",
+			nums:     []int{0, 1, 0, 3, 5, 0, 0, 7, 11, 12, 0, 23, 32},
+			expected: []int{1, 3, 5, 7, 11, 12, 23, 32, 0, 0, 0, 0, 0},
+		},
+	}
+
+	for _, testCase := range testTable {
+		//When
+		t.Logf("calling MoveZeroes(%v), ", testCase.nums)
+		MoveZeroes(testCase.nums)
+
+		//Then
+		t.Logf("result: %v", testCase.nums)
+		assert.Equal(t, testCase.expected, testCase.nums,
+			fmt.Sprintf("MoveZeroes returned %v, expected %v",
+				testCase.nums, testCase.expected))
+	}
+
+}
+
+// Тест алгоритма удаление повторов в отсортированном списке
+func TestRemoveDuplicates(t *testing.T) {
+	// Given
+	testTable := []struct {
+		name     string
+		nums     []int
+		expected int
+	}{
+		{
+			name:     "Array with length 3 and 1 duplicate",
+			nums:     []int{1, 1, 2},
+			expected: 2,
+		},
+		{
+			name:     "Array with length 10 and 5 duplicate",
+			nums:     []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4},
+			expected: 5,
+		},
+		{
+			name:     "Array with length 9 and 7 duplicate",
+			nums:     []int{0, 0, 1, 1, 1, 1, 1, 1, 1},
+			expected: 2,
+		},
+	}
+
+	for _, testCase := range testTable {
+		//When
+		result := RemoveDuplicates(testCase.nums)
+
+		//Then
+		t.Logf("calling RemoveDuplicates(%v), result: %d", testCase.nums, result)
+		assert.Equal(t, testCase.expected, result,
+			fmt.Sprintf("RemoveDuplicates returned %d, expected %d",
+				result, testCase.expected))
+	}
+
+}
