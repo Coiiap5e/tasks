@@ -1,4 +1,4 @@
-package tasks
+package structures
 
 type Queue[T any] interface {
 	Enqueue(value T) // Добавление элемента в конец очереди

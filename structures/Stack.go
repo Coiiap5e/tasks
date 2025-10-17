@@ -1,4 +1,4 @@
-package tasks
+package structures
 
 type Stack[T any] interface {
 	Push(value T)  // Добавление элемента на вершину стека

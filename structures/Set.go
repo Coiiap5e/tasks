@@ -1,4 +1,4 @@
-package tasks
+package structures
 
 type Set[T comparable] interface {
 	Add(value T)           // Добавление элемента в множество
